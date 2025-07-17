@@ -31,10 +31,13 @@ app.use(bodyParser.json());
 
 app.use(
     cors({
-        origin: ["https://biddingplatform.netlify.app"],
+        origin: ["http://localhost:3000", "https://biddingplatform.netlify.app"],
         credentials: true,
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+        allowedHeaders: 'Content-Type,Authorization',
     })
 );
+app.options('*', cors());
 
 const PORT = process.env.PORT || 5000;
 app.use("/api/users", userRoute);
