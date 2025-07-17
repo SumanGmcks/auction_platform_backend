@@ -157,8 +157,7 @@ const loginAsSeller = asyncHandler(async (req, res) => {
   }
 
   user.role = "seller"; 
-  await user.save(); // Set the role to seller
-
+  await user.save(); 
   const token = generateToken(user._id);
   res.cookie("token", token, {
     path: "/",

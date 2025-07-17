@@ -80,7 +80,7 @@ const sellProduct = asyncHandler(async (req, res) => {
 
     const commissionRate = product.commission;
     const commissionAmount = (commissionRate / 100) * highestBid.price;
-    const finalPrice = highestBid.price; // Seller gets full price
+    const finalPrice = highestBid.price; 
 
     product.isSoldout = true;
     product.soldTo = highestBid.user;
@@ -93,8 +93,7 @@ const sellProduct = asyncHandler(async (req, res) => {
     }
 
     const seller = await User.findById(product.user);
-    if (seller) {
-        // Ensure seller.balance is initialized
+    if (seller) {       
         seller.balance = (seller.balance || 0) + finalPrice;
         await seller.save();
     } else {
@@ -107,7 +106,7 @@ const sellProduct = asyncHandler(async (req, res) => {
     try {
         if (highestBid.user && highestBid.user.email) {
             await sendMail({
-                email: highestBid.user.email, // Send to the winning bidder
+                email: highestBid.user.email, 
                 from: `${process.env.SMTP_FROM_NAME || 'Bidding'} <${process.env.SMTP_FROM_EMAIL || 'non_reply@gmail.com'}>`,
                 subject: "Congratulations! You won the auction!",
                 html: `Congratulations! You won the auction for the product \"${product.title}\" with a bid of $${finalPrice}.`,
@@ -116,7 +115,7 @@ const sellProduct = asyncHandler(async (req, res) => {
         
         if (seller && seller.email) {
             await sendMail({
-                email: seller.email, // Send to the seller
+                email: seller.email, 
                 from: `${process.env.SMTP_FROM_NAME || 'Bidding'} <${process.env.SMTP_FROM_EMAIL || 'non_reply@gmail.com'}>`,
                 subject: "Your product has been sold!",
                 html: `Your product \"${product.title}\" has been sold for $${finalPrice}.`,

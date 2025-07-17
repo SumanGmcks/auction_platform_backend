@@ -13,7 +13,6 @@ const categoryRoute = require("./routes/categoryRoute");
 const errorHandler = require("./middleware/errorMiddleware");
 const app = express();
 
-// Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true });
@@ -32,7 +31,7 @@ app.use(bodyParser.json());
 
 app.use(
     cors({
-        origin: ["http://localhost:3000"],
+        origin: ["https://biddingplatform.netlify.app"],
         credentials: true,
     })
 );
