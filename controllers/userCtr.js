@@ -56,6 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
         email,
         photo,
         role,
+        token
       });
     } else {
       res.status(400);
@@ -105,6 +106,7 @@ const logiUser = asyncHandler(async (req, res) => {
       email,
       photo,
       role,
+      token
     });
   } else {
     res.status(400);
@@ -175,6 +177,7 @@ const loginAsSeller = asyncHandler(async (req, res) => {
       email,
       photo,
       role,
+      token
     });
   } else {
     res.status(400);
